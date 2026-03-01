@@ -109,7 +109,7 @@ Pi GPIO header:                    SOIC-8 chip:
 Pin 24 — GPIO8/SPI0_CE0 ────────── Pin 1  (/CS)
 Pin 21 — GPIO9/SPI0_MISO ───────── Pin 2  (MISO/DO)
 Pin 17 — 3.3V ──────────┬────────── Pin 3  (/WP)    ← must be driven high
-                        └────────── Pin 8  (VCC)
+                         └────────── Pin 8  (VCC)
 Pin 25 — GND ────────────────────── Pin 4  (GND)
 Pin 19 — GPIO10/SPI0_MOSI ──────── Pin 5  (MOSI/DI)
 Pin 23 — GPIO11/SPI0_SCLK ──────── Pin 6  (CLK)
@@ -632,11 +632,28 @@ CONFIG_H8_HAS_BAT_THRESHOLDS_IMPL=y
 CONFIG_H8_HAS_PRIMARY_FN_KEYS=y
 CONFIG_EC_LENOVO_PMH7=y
 
-# Payload — SeaBIOS
+# Payload — SeaBIOS (built from source by coreboot build system)
 CONFIG_PAYLOAD_SEABIOS=y
-# CONFIG_PAYLOAD_EDK2 is not set
-# CONFIG_PAYLOAD_NONE is not set
+CONFIG_SEABIOS_STABLE=y
 CONFIG_SEABIOS_HARDWARE_IRQ=y
+CONFIG_SEABIOS_VGA_COREBOOT=y
+
+# PXE — iPXE built from source by coreboot, targeting Intel I217-LM NIC
+# CBFS_SIZE increased to 0x700000 to accommodate iPXE (base config used 0x600000)
+CONFIG_CBFS_SIZE=0x700000
+CONFIG_PXE=y
+# CONFIG_PXE_ROM is not set           ← do NOT use a pre-built ROM
+CONFIG_BUILD_IPXE=y                   # coreboot builds iPXE from source
+CONFIG_IPXE_STABLE=y
+CONFIG_PXE_ROM_ID="8086,153b"         # Intel I217-LM — W541 onboard GbE
+
+# Secondary payloads (accessible from SeaBIOS boot menu)
+CONFIG_COREINFO_SECONDARY_PAYLOAD=y   # system info / CBFS browser
+CONFIG_MEMTEST_SECONDARY_PAYLOAD=y    # Memtest86+ v6
+CONFIG_MEMTEST86PLUS_V6=y
+CONFIG_MEMTEST86PLUS_ARCH_64=y
+CONFIG_MEMTEST_STABLE=y
+CONFIG_COMPRESS_SECONDARY_PAYLOAD=y
 
 # SMMSTORE
 CONFIG_SMMSTORE=y
@@ -651,7 +668,6 @@ CONFIG_DEFAULT_CONSOLE_LOGLEVEL_7=y
 CONFIG_DEFAULT_CONSOLE_LOGLEVEL=7
 CONFIG_CONSOLE_USE_LOGLEVEL_PREFIX=y
 CONFIG_CONSOLE_USE_ANSI_ESCAPES=y
-CONFIG_POST_DEVICE_NONE=y
 CONFIG_HWBASE_DEBUG_CB=y
 
 # TPM
@@ -687,6 +703,34 @@ CONFIG_CACHE_MRC_SETTINGS=y
 ```
 
 > **Path note:** All `_PATH` and `_FILE` entries above use `/home/user/coreboot/...` as a placeholder. Replace with your actual username and directory layout. The VBT has no path entry here — coreboot picks it up automatically from `src/mainboard/lenovo/t540p/data.vbt` inside the source tree (placed in Part 6).
+
+---
+
+## Part 7a — Optional: PXE Boot via iPXE
+
+If you want network boot, coreboot can build iPXE from source and embed it directly in the ROM. No pre-built ROM file is needed — the coreboot build system fetches and compiles iPXE automatically when `CONFIG_BUILD_IPXE=y` is set.
+
+### How it works
+
+The W541's onboard Gigabit Ethernet is an Intel I217-LM (`PCI ID 8086:153b`). Setting `CONFIG_PXE_ROM_ID="8086,153b"` tells coreboot to associate the compiled iPXE ROM with that specific NIC. SeaBIOS then finds it and makes the NIC available as a PXE boot option.
+
+**Important:** `CONFIG_CBFS_SIZE` must be increased from `0x600000` to `0x700000` to fit iPXE alongside the Nvidia VGA ROM, VBT, and SeaBIOS. Without this the build will fail with a CBFS space error.
+
+### What the iPXE options add
+
+The default iPXE build covers standard PXE/DHCP network boot which is all you need for a local network boot server like iVentoy. HTTPS and trust/certificate options are not enabled — local network boot servers don't typically serve over HTTPS and there's no benefit to the extra complexity.
+
+### Secondary payloads
+
+The PXE config also adds two secondary payloads accessible from the SeaBIOS boot menu:
+- **Coreinfo** — shows system information, CBFS contents, and memory map; useful for diagnostics
+- **Memtest86+ v6** (64-bit) — full memory test
+
+These are compressed and stored in CBFS, which is another reason for the larger `CBFS_SIZE`.
+
+### To disable PXE / revert to base config
+
+Remove or comment out the PXE block and secondary payload lines, and revert `CONFIG_CBFS_SIZE` back to `0x600000`.
 
 ---
 
