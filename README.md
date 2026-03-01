@@ -109,7 +109,7 @@ Pi GPIO header:                    SOIC-8 chip:
 Pin 24 — GPIO8/SPI0_CE0 ────────── Pin 1  (/CS)
 Pin 21 — GPIO9/SPI0_MISO ───────── Pin 2  (MISO/DO)
 Pin 17 — 3.3V ──────────┬────────── Pin 3  (/WP)    ← must be driven high
-                         └────────── Pin 8  (VCC)
+                        └────────── Pin 8  (VCC)
 Pin 25 — GND ────────────────────── Pin 4  (GND)
 Pin 19 — GPIO10/SPI0_MOSI ──────── Pin 5  (MOSI/DI)
 Pin 23 — GPIO11/SPI0_SCLK ──────── Pin 6  (CLK)
