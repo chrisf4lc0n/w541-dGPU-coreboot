@@ -745,7 +745,7 @@ Remove or comment out the PXE block and secondary payload lines, and revert `CON
 ```bash
 sudo apt install -y \
   build-essential gnat flex bison libncurses5-dev wget zlib1g-dev \
-  git python3 libelf-dev nasm imagemagick pkg-config libssl-dev \
+  git python3 libelf-dev nasm imagemagick pkg-config libssl-dev gcc-multilib libc6-dev-i386 \
   iasl unifont
 ```
 
