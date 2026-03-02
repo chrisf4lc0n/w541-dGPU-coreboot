@@ -488,7 +488,7 @@ cp flashregion_3_gbe.bin              ~/coreboot/coreboot-blobs/
 cp mrc.bin                            ~/coreboot/coreboot-blobs/
 
 # VBT — must go to this exact path in the coreboot source tree
-cp intel_vbt.bin  ~/coreboot/coreboot/src/mainboard/lenovo/t540p/data.vbt
+cp intel_vbt.bin /home/chrisf4lc0n/Downloads/coreboot/src/mainboard/lenovo/haswell/variants/w541
 
 # Nvidia ROM — in coreboot-blobs alongside the others
 cp nvidia_k1100m.rom  ~/coreboot/coreboot-blobs/pci10de,0ff6.rom    # K1100M
