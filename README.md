@@ -467,7 +467,7 @@ The MRC blob is the same across all Haswell platforms. If you have a working T44
 ls 3rdparty/blobs/northbridge/intel/haswell/mrc.bin
 ```
 
-If not available, extract it from any Haswell ThinkPad factory dump using UEFITool's UEFIExtract (look for the "Intel Reference Code" module in the BIOS region).
+If not available, use chromeos one:
 
 ```bash
 cd util/chromeos
