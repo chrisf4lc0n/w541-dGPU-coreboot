@@ -719,9 +719,7 @@ If you want network boot, coreboot can build iPXE from source and embed it direc
 
 ### How it works
 
-The W541's onboard Gigabit Ethernet is an Intel I217-LM (`PCI ID 8086:153b`). Setting `CONFIG_PXE_ROM_ID="8086,153b"` tells coreboot to associate the compiled iPXE ROM with that specific NIC. SeaBIOS then finds it and makes the NIC available as a PXE boot option.
-
-**Important:** `CONFIG_CBFS_SIZE` must be increased from `0x600000` to `0x700000` to fit iPXE alongside the Nvidia VGA ROM, VBT, and SeaBIOS. Without this the build will fail with a CBFS space error.
+The W541's onboard Gigabit Ethernet is an Intel I217-LM (`PCI ID 8086:153a`). Setting `CONFIG_PXE_ROM_ID="8086,153a"` tells coreboot to associate the compiled iPXE ROM with that specific NIC. SeaBIOS then finds it and makes the NIC available as a PXE boot option.
 
 ### What the iPXE options add
 
