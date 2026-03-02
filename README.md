@@ -589,7 +589,7 @@ CONFIG_VGA_BIOS_ID="10de,0ff6"
 # CONFIG_VGA_BIOS_SECOND is not set
 
 # K2100M (GK104GL, PCI ID 10de:11fc) — should work in principle; not tested:
-# CONFIG_VGA_BIOS_FILE="/home/user/coreboot/coreboot-blobs/pci10de,11fc.rom"
+# CONFIG_VGA_BIOS_FILE="coreboot-blobs/pci10de,11fc.rom"
 # CONFIG_VGA_BIOS_ID="10de,11fc"
 # ============================================================
 
