@@ -536,13 +536,13 @@ CONFIG_BOARD_ROMSIZE_KB_12288=y
 
 # Chipset — blob paths (UPDATE THESE TO YOUR OWN PATHS)
 CONFIG_HAVE_IFD_BIN=y
-CONFIG_IFD_BIN_PATH="/home/user/coreboot/coreboot-blobs/flashregion_0_flashdescriptor.bin"
+CONFIG_IFD_BIN_PATH="coreboot-blobs/flashregion_0_flashdescriptor.bin"
 CONFIG_HAVE_ME_BIN=y
-CONFIG_ME_BIN_PATH="/home/user/coreboot/coreboot-blobs/flashregion_2_intel_me.bin"
+CONFIG_ME_BIN_PATH="coreboot-blobs/flashregion_2_intel_me.bin"
 CONFIG_HAVE_GBE_BIN=y
-CONFIG_GBE_BIN_PATH="/home/user/coreboot/coreboot-blobs/flashregion_3_gbe.bin"
+CONFIG_GBE_BIN_PATH="coreboot-blobs/flashregion_3_gbe.bin"
 CONFIG_HAVE_MRC=y
-CONFIG_MRC_FILE="/home/user/coreboot/coreboot-blobs/mrc.bin"
+CONFIG_MRC_FILE="coreboot-blobs/mrc.bin"
 
 # ME cleaner — runs automatically at build time on the raw ME binary above
 CONFIG_USE_ME_CLEANER=y
@@ -584,7 +584,7 @@ CONFIG_MAINBOARD_USE_LIBGFXINIT=y
 # Nvidia dGPU ROM only — iGPU handled by libgfxinit
 # K1100M (GK107GL, PCI ID 10de:0ff6) — confirmed working:
 CONFIG_VGA_BIOS=y
-CONFIG_VGA_BIOS_FILE="/home/user/coreboot/coreboot-blobs/pci10de,0ff6.rom"
+CONFIG_VGA_BIOS_FILE="coreboot-blobs/pci10de,0ff6.rom"
 CONFIG_VGA_BIOS_ID="10de,0ff6"
 # CONFIG_VGA_BIOS_SECOND is not set
 
@@ -608,7 +608,7 @@ CONFIG_PCI_SET_BUS_MASTER_PCI_BRIDGES=y
 CONFIG_PCI_ALLOW_BUS_MASTER_ANY_DEVICE=y
 CONFIG_CARDBUS_PLUGIN_SUPPORT=y
 
-# Intel GMA — VBT is picked up from src/mainboard/lenovo/t540p/data.vbt
+# Intel GMA — VBT is picked up from src/mainboard/lenovo/haswell/vendors/w541/data.vbt
 CONFIG_INTEL_DDI=y
 CONFIG_INTEL_GMA_ACPI=y
 CONFIG_GFX_GMA=y
@@ -646,13 +646,12 @@ CONFIG_SEABIOS_HARDWARE_IRQ=y
 CONFIG_SEABIOS_VGA_COREBOOT=y
 
 # PXE — iPXE built from source by coreboot, targeting Intel I217-LM NIC
-# CBFS_SIZE increased to 0x700000 to accommodate iPXE (base config used 0x600000)
 CONFIG_CBFS_SIZE=0x600000
 CONFIG_PXE=y
 # CONFIG_PXE_ROM is not set           ← do NOT use a pre-built ROM
 CONFIG_BUILD_IPXE=y                   # coreboot builds iPXE from source
 CONFIG_IPXE_STABLE=y
-CONFIG_PXE_ROM_ID="8086,153b"         # Intel I217-LM — W541 onboard GbE
+CONFIG_PXE_ROM_ID="8086,153a"         # Intel I217-LM — W541 onboard GbE
 
 # Secondary payloads (accessible from SeaBIOS boot menu)
 CONFIG_COREINFO_SECONDARY_PAYLOAD=y   # system info / CBFS browser
