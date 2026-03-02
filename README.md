@@ -558,7 +558,7 @@ CONFIG_SYSTEM_TYPE_LAPTOP=y
 #
 # ROM / CBFS
 #
-CONFIG_CBFS_SIZE=0x700000
+CONFIG_CBFS_SIZE=0x600000
 CONFIG_BOARD_ROMSIZE_KB_12288=y
 CONFIG_COREBOOT_ROMSIZE_KB_12288=y
 CONFIG_COREBOOT_ROMSIZE_KB=12288
@@ -1018,12 +1018,6 @@ The default iPXE build covers standard PXE/DHCP network boot which is all you ne
 The PXE config also adds two secondary payloads accessible from the SeaBIOS boot menu:
 - **Coreinfo** — shows system information, CBFS contents, and memory map; useful for diagnostics
 - **Memtest86+ v6** (64-bit) — full memory test
-
-These are compressed and stored in CBFS, which is another reason for the larger `CBFS_SIZE`.
-
-### To disable PXE / revert to base config
-
-Remove or comment out the PXE block and secondary payload lines, and revert `CONFIG_CBFS_SIZE` back to `0x600000`.
 
 ---
 
