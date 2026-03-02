@@ -640,7 +640,7 @@ CONFIG_SEABIOS_VGA_COREBOOT=y
 
 # PXE — iPXE built from source by coreboot, targeting Intel I217-LM NIC
 # CBFS_SIZE increased to 0x700000 to accommodate iPXE (base config used 0x600000)
-CONFIG_CBFS_SIZE=0x700000
+CONFIG_CBFS_SIZE=0x600000
 CONFIG_PXE=y
 # CONFIG_PXE_ROM is not set           ← do NOT use a pre-built ROM
 CONFIG_BUILD_IPXE=y                   # coreboot builds iPXE from source
