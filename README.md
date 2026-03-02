@@ -469,6 +469,13 @@ ls 3rdparty/blobs/northbridge/intel/haswell/mrc.bin
 
 If not available, extract it from any Haswell ThinkPad factory dump using UEFITool's UEFIExtract (look for the "Intel Reference Code" module in the BIOS region).
 
+```bash
+cd util/chromeos
+./crosfirmware.sh peppy
+../cbfstool/cbfstool coreboot-*.bin extract -f mrc.bin -n mrc.bin -r RO_SECTION
+cp mrc.bin ~/coreboot-blobs/
+```
+
 ### 5.6 Intel ME — handled by the build
 
 **No manual me_cleaner step is needed.** The `.config` includes `CONFIG_USE_ME_CLEANER=y` with `-S` args, so coreboot runs me_cleaner on the raw ME binary automatically at build time. Just pass `flashregion_2_intel_me.bin` directly — no pre-processing required.
